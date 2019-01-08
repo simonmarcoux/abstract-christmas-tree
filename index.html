@@ -1,0 +1,15 @@
+<body>
+    <svg 
+            viewBox="0 0 321.8 381.3" style="position: absolute; opacity: 0; enable-background:new 0 0 321.8 381.3;" >
+    <path id="p" d="M26.5,380.8h4c0,0,272.8,0,272.8-5.5c0-4.1-272.8,1.4-272.8-9.6
+        c0-11,252.2-12.3,252.2-19.2c0-6.9-234.4-5.5-234.4-12.3s216.6-23.3,216.6-32.9S71.6,293,71.6,286.2c0-6.9,178.2-37,178.2-43.9
+        c0-6.9-159,2.7-159-4.1c0-6.9,152.2-12.3,152.2-19.2c0-6.9-142.6-4.1-142.6-9.6s124.7-13.7,124.7-20.6c0-6.9-105.5-5.5-105.5-9.6
+        c0-4.1,80.9-15.1,80.9-20.6s-67.2-2.7-67.2-6.9s48-13.7,48-17.8c0-4.1-27.4,1.4-34.3-6.9c-6.9-8.2,28.8-15.2,27.4-27.4
+        c-1.4-12.3-20.6-42.5-20.6-42.5l-1.4-2.5" />
+    </svg>
+        
+    <canvas id=c></canvas>
+</body>
+<script>
+    cv=c,ctx=cv.getContext("2d");class Star{constructor(t){this.ctx=t,this.draw(155,50,5,3,7)}draw(t,i,s,h,e){var a=Math.PI/2*3,n=t,o=i,c=Math.PI/s;this.ctx.strokeSyle="#000",this.ctx.beginPath(),this.ctx.moveTo(t,i-h);for(let r=0;r<s;r++)n=t+Math.cos(a)*h,o=i+Math.sin(a)*h,this.ctx.lineTo(n,o),a+=c,n=t+Math.cos(a)*e,o=i+Math.sin(a)*e,this.ctx.lineTo(n,o),a+=c;this.ctx.lineTo(t,i-h),this.ctx.closePath(),this.ctx.lineWidth=5,this.ctx.strokeStyle="#CAFBFD",this.ctx.stroke()}move(t,i){this.draw(t,i,5,3,7)}}class Tree{constructor(t,i,s){this.width=t,this.color=i,this.star=s,this.distancePerPoint=4,this.drawFPS=60,this.orig=document.querySelector("path"),this.points,this.cv=cv,this.ctx=ctx,this.cv.height=window.innerHeight,this.cv.width=window.innerWidth,this.startDrawingPath()}startDrawingPath(){this.points=[],this.ctx.lineWidth=this.width,this.ctx.strokeStyle=this.color,this.buildPath()}buildPath(){var t=this.points.length*this.distancePerPoint;t<=this.orig.getTotalLength()?(this.points.push(this.orig.getPointAtLength(t)),this.redrawcv()):this.star.move(155,50),requestAnimationFrame(this.buildPath.bind(this))}redrawcv(){this.clearcv(),this.drawBG(),this.ctx.beginPath(),this.ctx.moveTo(this.points[0].x,this.points[0].y);for(let t=1;t<this.points.length;t++)this.ctx.lineTo(this.points[t].x,this.points[t].y);this.ctx.stroke()}clearcv(){this.ctx.clearRect(0,0,this.cv.width,this.cv.height)}drawBG(){this.ctx.fillStyle="#09074E",this.ctx.fillRect(0,0,this.cv.width,this.cv.height)}}new Tree(4,"#CAFBFD",new Star(ctx));
+</script>
